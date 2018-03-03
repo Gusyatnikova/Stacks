@@ -13,7 +13,8 @@ import java.util.Objects;
  */
 public class ArrayStack implements Stack {
 
-    private List<Integer> elements;
+    private int size;
+    private int[] elements;
 
     /**
      * TODO: Initialize array here.
@@ -21,8 +22,10 @@ public class ArrayStack implements Stack {
      * The constructor initializes empty stack.
      */
     public ArrayStack() {
-        elements = new ArrayList<>();
+        elements = new int[50];
+        size = 0;
     }
+
 
     /**
      * TODO: Add item to the stack.
@@ -31,7 +34,7 @@ public class ArrayStack implements Stack {
      */
     @Override
     public void push(int value) {
-        elements.add(0, value);
+           elements[++size] = value;
     }
 
     /**
@@ -47,8 +50,7 @@ public class ArrayStack implements Stack {
         if (isEmpty()) {
             throw new NoSuchElementException("Stack is empty.");
         }
-
-        elements.remove(0);
+       size--;
     }
 
     /**
@@ -64,8 +66,7 @@ public class ArrayStack implements Stack {
         if (isEmpty()) {
             throw new NoSuchElementException("Stack is empty.");
         }
-
-        return elements.get(0);
+        return elements[size];
     }
 
     /**
@@ -75,7 +76,7 @@ public class ArrayStack implements Stack {
      */
     @Override
     public int size() {
-        return elements.size();
+        return size;
     }
 
     /**
@@ -85,7 +86,7 @@ public class ArrayStack implements Stack {
      */
     @Override
     public boolean isEmpty() {
-        return elements.isEmpty();
+            return (size == 0);
     }
 
     /**
@@ -100,7 +101,7 @@ public class ArrayStack implements Stack {
         int size = size();
 
         for (int i = 0; i < size; i++) {
-            elementsInfo.append(elements.get(i));
+            elementsInfo.append(elements[i]);
 
             if (i < size - 1) {
                 elementsInfo.append(",");

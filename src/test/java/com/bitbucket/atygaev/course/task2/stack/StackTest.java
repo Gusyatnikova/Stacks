@@ -39,6 +39,7 @@ public abstract class StackTest {
 
     @Test
     public void isEmptyShouldReturnFalseOnNonEmptyStack() {
+
         stack.push(random.nextInt());
 
         assertFalse(stack.isEmpty());

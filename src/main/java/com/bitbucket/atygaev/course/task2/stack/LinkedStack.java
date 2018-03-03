@@ -11,17 +11,33 @@ import java.util.Objects;
  * Current implementation used LinkedList
  * but it should be replaced to linked list of int.
  */
+
+
 public class LinkedStack implements Stack {
+    private class Node {
+        private int data;
+        private Node next;
 
-    private List<Integer> elements;
+        public Node() {
+        }
 
+        public Node(int data) {
+            this.data = data;
+        }
+    }
+
+    private Node elements;
+    private Node head;
+    private int size;
     /**
      * TODO: Initialize linked list here.
      *
      * The constructor initializes empty stack.
      */
     public LinkedStack() {
-        elements = new LinkedList<>();
+        Node head = new Node();
+        head.next = null;
+        size = 0;
     }
 
     /**
@@ -31,7 +47,10 @@ public class LinkedStack implements Stack {
      */
     @Override
     public void push(int value) {
-        elements.add(0, value);
+        Node cur = new Node(value);
+        cur.next = head;
+        head = cur;
+        size++;
     }
 
     /**
@@ -48,8 +67,8 @@ public class LinkedStack implements Stack {
         if (isEmpty()) {
             throw new NoSuchElementException("Stack is empty.");
         }
-
-        elements.remove(0);
+        head = head.next;
+        size--;
     }
 
     /**
@@ -65,8 +84,7 @@ public class LinkedStack implements Stack {
         if (isEmpty()) {
             throw new NoSuchElementException("Stack is empty.");
         }
-
-        return elements.get(0);
+        return head.data;
     }
 
     /**
@@ -76,7 +94,7 @@ public class LinkedStack implements Stack {
      */
     @Override
     public int size() {
-        return elements.size();
+        return size;
     }
 
     /**
@@ -86,7 +104,7 @@ public class LinkedStack implements Stack {
      */
     @Override
     public boolean isEmpty() {
-        return elements.isEmpty();
+        return (size == 0);
     }
 
     /**
@@ -101,7 +119,7 @@ public class LinkedStack implements Stack {
         int size = size();
 
         for (int i = 0; i < size; i++) {
-            elementsInfo.append(elements.get(i));
+         //   elementsInfo.append(elements.get(i));
 
             if (i < size - 1) {
                 elementsInfo.append(",");
